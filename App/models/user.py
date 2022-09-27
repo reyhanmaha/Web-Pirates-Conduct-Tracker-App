@@ -3,7 +3,7 @@ from App.database import db
 
 class lecturer(db.Model):
     lecturerID = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String, nullable=False)
+    username =  db.Column(db.String(60), nullable=False)
     firstName= db.Column(db.String(50), nullable=False)
     lastName= db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(120), nullable=False)
