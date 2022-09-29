@@ -1,8 +1,8 @@
 from App.models import lecturer
 from App.database import db
 
-def create_user(username, password):
-    newuser = lecturer(username=username, password=password)
+def create_user(username,firstName,lastName, password):
+    newuser = lecturer(username=username,firstName=firstName,lastName=lastName, password=password)
     db.session.add(newuser)
     db.session.commit()
     return newuser
