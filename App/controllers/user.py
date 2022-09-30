@@ -2,7 +2,7 @@ from App.models import lecturer
 from App.database import db
 
 def create_user(username,firstName,lastName, password):
-    newuser = lecturer(username=username,firstName=firstName,lastName=lastName, password=password)
+    newuser = lecturer(username=username, firstName=firstName, lastName=lastName, password=password)
     db.session.add(newuser)
     db.session.commit()
     return newuser
@@ -18,6 +18,7 @@ def get_all_users():
 
 def get_all_users_json():
     users = lecturer.query.all()
+    print(users)
     if not users:
         return []
     users = [user.toJSON() for user in users]
