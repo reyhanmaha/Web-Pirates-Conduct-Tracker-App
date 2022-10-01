@@ -22,9 +22,9 @@ def signup():
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = get_all_users()
-    return render_template('users.html', users=users)
+    return jsonify(users)
 
-@user_views.route('/api/users')
+@user_views.route('/api/users',methods=['GET'])
 def client_app():
     users = get_all_users_json()
     return jsonify(users)
