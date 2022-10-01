@@ -1,9 +1,24 @@
 from App.models import student, review
 from App.database import db
 
-def create_student():
-    pass
+def create_student(firstName,lastName,karmaScore):
+    student=student(firstName=firstName,lastName=lastName,karmaScore=karmaScore)
+    db.session.add(student)
+    db.session.commit()
+    return student
 
+def get_student_by_ID(studentID):
+    return student.query.filter_by(studentID=studentID).first()
+
+def get_all_students():
+    return student.query.all()
+
+def get_all_students_json():
+    students = student.query.all()
+    if not students:
+        return []
+    students = [student.toJSON() for student in students]
+    return students
 
 def getKarmaScore(studentID):
 
