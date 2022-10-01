@@ -18,7 +18,7 @@ def get_all_users():
 
 def get_all_users_json():
     users = lecturer.query.all()
-    print(users)
+    #print(users)
     if not users:
         return []
     users = [user.toJSON() for user in users]

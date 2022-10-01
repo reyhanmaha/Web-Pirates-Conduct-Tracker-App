@@ -14,7 +14,7 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 @user_views.route('/api/signup', methods=['POST'])    
 def signup():
     data = request.json
-    result = create_user(username=data['username'], password=data['password'])
+    result = create_user(username=data['username'],firstName=data['firstName'],lastName=data["lastName"], password=data['password'])
     if result:
         return jsonify({"message": "User created"}), 201
     return jsonify({"message": "Server error"}), 500
