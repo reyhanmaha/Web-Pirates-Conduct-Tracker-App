@@ -3,16 +3,28 @@ from App.database import db
 class review(db.Model):
     reviewID = db.Column(db.Integer, primary_key=True)
     lecturerID = db.Column(db.Integer, primary_key=True)
-    reviewID = db.Column(db.Integer, primary_key=True)
-    reviewID = db.Column(db.Integer, primary_key=True)
+    studentID = db.Column(db.Integer, primary_key=True)
+    details = db.Column(db.String(120), primary_key=True)
+    upVotes = db.Column(db.Integer, nullable = True)
+    downVotes = db.Column(db.Integer, nullable = True)
 
-    def __init__(self, studentID, firstName, lastName, up):
+    def __init__(self, reviewID, lectureID, studentID, details, upVotes, downVotes ):
+        self.reviewID= reviewID
+        self.lectureID = lectureID
         self.studentID = studentID
-        self.firstName = firstName
-        self.lastName = lastName
-        self.upvote = 0
-        self.downvotes = 0
+        self.details = details
+        self.upVotes = 0
+        self.downVotes = 0
 
+    def toJSON(self):
+        return{
+            'reviewID': self.reviewID,
+            'lectureID': self.lectureID,
+            'studentID': self.studentID,
+            'details' :self.details,
+            'upVotes': self.upVotes,
+            'downVotes' : self.downVotes
+        }
 
 
 

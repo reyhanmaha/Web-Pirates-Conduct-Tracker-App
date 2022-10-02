@@ -5,7 +5,7 @@ class student(db.Model):
     studentID = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(80), nullable=False)
     lastName = db.Column(db.String(80), nullable=False)
-    karmaScore = db.Column(db.Integer)
+    karmaScore = db.Column(db.Integer, nullable = True)
 
     def __init__(self, firstName, lastName):
         self.firstName = firstName
