@@ -7,6 +7,7 @@ class lecturer(db.Model):
     firstName= db.Column(db.String(50), nullable=False)
     lastName= db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(120), unique=True , nullable=False)
+    myReviews= db.relationship('review',backref='lecturer',lazy=True)
 
     def __init__(self, username, firstName, lastName, password):
         self.username = username

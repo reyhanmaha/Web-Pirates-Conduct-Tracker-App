@@ -2,12 +2,15 @@ from App.database import db
 
 class review(db.Model):
     reviewID = db.Column(db.Integer, primary_key=True)
-    lecturerID = db.Column(db.Integer, primary_key=True)
-    studentID = db.Column(db.Integer, primary_key=True)
+    #lecturerID = db.Column(db.Integer, primary_key=True)
+    userID= db.Column(db.Integer,db.ForeignKey('lecturer.lecturerID', nullable=False))
+    #studentID = db.Column(db.Integer, primary_key=True)
+    studentID= db.Column(db.Integer,db.ForeignKey('student.studentID', nullable=False))
     details = db.Column(db.String(120), primary_key=True)
     upVotes = db.Column(db.Integer, nullable = True)
     downVotes = db.Column(db.Integer, nullable = True)
 
+    
     def __init__(self, reviewID, lectureID, studentID, details, upVotes, downVotes ):
         self.reviewID= reviewID
         self.lectureID = lectureID
