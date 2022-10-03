@@ -17,13 +17,14 @@ student_views = Blueprint('student_views', __name__, template_folder='../templat
 def add_student():
     data=request.get_json()
     student=create_student(data['firstName'], data['lastName'],0)
-    return jsonify(student)
+    people=get_all_students_json()
+    return jsonify(people)
 
 @student_views.route('/showStudents', methods=['GET'])
 #@jwt_required()
 def show_all_students():
     students=get_all_students_json()
-    return students
+    return jsonify(students)
 
 @student_views.route('/getStudent/<studentID>',methods=['GET'])
 @jwt_required()

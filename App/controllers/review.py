@@ -2,10 +2,10 @@ from App.models import review
 from App.database import db
 
 def create_review(studentID, lecturerID, details):
-    newreview = review(studentID, lecturerID, details)
-    db.session.add(newreview)
+    newReview = review(studentID, lecturerID, details)
+    db.session.add(newReview)
     db.session.commit()
-    return newreview
+    return newReview
 
 def getReview(reviewID):
     return review.query.filter_by(reviewID=reviewID).first()
