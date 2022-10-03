@@ -20,18 +20,10 @@ def get_all_students_json():
     students = [student.toJSON() for student in students]
     return students
 
+#calls the calculateKarmaScore method in student model 
 def getKarmaScore(studentID):
+    value = calculateKarmaScore(studentID)
+    return jsonify(value)
 
-    upvotes = 0
-    downvotes = 0
 
-    reviews = review.query.all(studentID)
-
-    for review in reviews:
-        upvotes += review.upvotes
-        downvotes += review.downvotes
-
-    karma = upvotes - downvotes
-
-    return karma
 
