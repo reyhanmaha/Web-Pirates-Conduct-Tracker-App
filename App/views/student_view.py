@@ -13,14 +13,14 @@ from App.controllers import (
 student_views = Blueprint('student_views', __name__, template_folder='../templates')
 
 @student_views.route('/addStudent', methods=['POST'])
-@jwt_required()
+#@jwt_required()
 def add_student():
-    data=request.json
-    student=create_student(firstName=data['fistName'], lastName=data['lastName'],karmaScore=0)
-    return student.toJSON()
+    data=request.get_json()
+    student=create_student(data['firstName'], data['lastName'],0)
+    return jsonify(student)
 
 @student_views.route('/showStudents', methods=['GET'])
-@jwt_required()
+#@jwt_required()
 def show_all_students():
     students=get_all_students_json()
     return students

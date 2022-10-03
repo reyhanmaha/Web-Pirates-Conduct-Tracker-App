@@ -2,10 +2,10 @@ from App.models import student, review
 from App.database import db
 
 def create_student(firstName,lastName,karmaScore):
-    student=student(firstName=firstName,lastName=lastName,karmaScore=karmaScore)
-    db.session.add(student)
+    pupil=student(firstName=firstName,lastName=lastName,karmaScore=karmaScore)
+    db.session.add(pupil)
     db.session.commit()
-    return student
+    return pupil
 
 def get_student_by_ID(studentID):
     return student.query.filter_by(studentID=studentID).first()

@@ -7,7 +7,7 @@ class student(db.Model):
     lastName = db.Column(db.String(80), nullable=False)
     karmaScore = db.Column(db.Integer, nullable = True)
 
-    def __init__(self, firstName, lastName):
+    def __init__(self, firstName, lastName,karmaScore):
         self.firstName = firstName
         self.lastName = lastName
         self.karmaScore = 0

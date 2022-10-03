@@ -16,6 +16,7 @@ from App.controllers import (
 
 from App.views import (
     user_views,
+    student_views,
     index_views
 )
 
@@ -23,7 +24,8 @@ from App.views import (
 
 views = [
     user_views,
-    index_views
+    index_views,
+    student_views
 ]
 
 def add_views(app, views):
