@@ -15,6 +15,7 @@ review_views = Blueprint('review_views', __name__, template_folder='../templates
 def add_Review():
     data=request.get_json()
     review=create_review(data['studentID'], data['lecturerID'], data['details'])
+    #review=create_review(data['details'])
     return jsonify(review)
 
 @review_views.route('/showAllReviews',methods=['GET'])

@@ -1,8 +1,13 @@
-from App.models import review
+from App.models import review, student
 from App.database import db
+from App.controllers import create_student
 
-def create_review(studentID, lecturerID, details):
-    newReview = review(studentID, lecturerID, details)
+def create_review(lecturerID,studentID, details):
+    data=student.query.get(studentID)
+    if data==None:
+        newStudent=create_student('gordon','barry',0)
+        studentID=newStudent.studentID
+    newReview = review(lecturerID,studentID, details)
     db.session.add(newReview)
     db.session.commit()
     return newReview

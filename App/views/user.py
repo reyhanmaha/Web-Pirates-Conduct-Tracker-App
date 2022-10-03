@@ -12,7 +12,7 @@ from App.controllers import (
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
-@user_views.route('/signgup', methods=['POST','GET'])    
+@user_views.route('/signup', methods=['POST','GET'])    
 def signup():
     data = request.get_json()
     #data={
