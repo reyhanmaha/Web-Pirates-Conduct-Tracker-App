@@ -11,12 +11,20 @@ from App.controllers import (
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
-@user_views.route('/api/signup', methods=['POST'])    
+@user_views.route('/', methods=['POST','GET'])    
 def signup():
-    data = request.json
-    result = create_user(username=data['username'],firstName=data['firstName'],lastName=data["lastName"], password=data['password'])
+    data = request.get_json()
+    #data={
+    #    "username": "yok",
+    #    "firstName": "map",
+    #    "lastName": "chaan",
+    #    "password": "kel"
+    #}
+    result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
+    print(result)
     if result:
         return jsonify({"message": "User created"}), 201
+        #return render_template('index.html')
     return jsonify({"message": "Server error"}), 500
 
 @user_views.route('/users', methods=['GET'])
