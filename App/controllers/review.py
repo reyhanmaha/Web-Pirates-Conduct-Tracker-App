@@ -3,15 +3,15 @@ from App.database import db
 from App.controllers import create_student,calculateKarmaScore
 from flask import jsonify
 
-def create_review(lecturerID,studentID, details):
+def create_review(id,studentID, details):
     data=student.query.get(studentID)
-    user=lecturer.query.get(lecturerID)
+    user=lecturer.query.get(id)
     if user==None:
         return None
     if data==None:
         newStudent=create_student('gordon','barry',0)
         studentID=newStudent.studentID
-    newReview = review(lecturerID=lecturerID,studentID=studentID,details=details)
+    newReview = review(lecturerID=id,studentID=studentID,details=details)
     db.session.add(newReview)
     db.session.commit()
     return newReview.toJSON()

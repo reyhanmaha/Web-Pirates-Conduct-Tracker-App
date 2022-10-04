@@ -2,7 +2,7 @@ from App.database import db
 
 class review(db.Model):
     reviewID = db.Column(db.Integer, primary_key=True)
-    lecturerID= db.Column(db.Integer,db.ForeignKey('lecturer.lecturerID'), nullable=False)
+    lecturerID= db.Column(db.Integer,db.ForeignKey('lecturer.id'), nullable=False)
     studentID= db.Column(db.Integer,db.ForeignKey('student.studentID'), nullable=False)
     details = db.Column(db.String(300))
     upVotes = db.Column(db.Integer, nullable = True)

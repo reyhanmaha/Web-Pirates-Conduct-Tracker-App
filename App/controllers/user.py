@@ -23,7 +23,7 @@ def get_all_users_json():
     users = [user.toJSON() for user in users]
     return users
 
-def create_review(studentID, lecturerID, details):
+def create_review(studentID, id, details):
 
     student = student.query(studentID)
 
@@ -33,12 +33,12 @@ def create_review(studentID, lecturerID, details):
         db.session.commit() # not sure if needed
         studentID = newStudent.studentID
         
-    newreview = review(studentID, lecturerID, details)
+    newreview = review(studentID, id, details)
     db.session.add(newreview)
     db.session.commit()
     return newreview
 
-def update_review(reviewID, lecturerID, details):
+def update_review(reviewID, id, details):
     pass
 
 #not sure if functions would require readded and commiting reviews to model
@@ -87,8 +87,8 @@ def view_all_reviews():
 
 
 
-def update_user(lecturerID, username):
-    user = get_user(lecturerID)
+def update_user(id, username):
+    user = get_user(id)
     if user:
         user.username = username
         db.session.add(user)

@@ -17,7 +17,7 @@ class lecturer(db.Model):
 
     def toJSON(self):
         return{
-            'lecturerID': self.id,
+            'id': self.id,
             'username': self.username,
             'firstName': self.firstName,
             'lastName': self.lastName
