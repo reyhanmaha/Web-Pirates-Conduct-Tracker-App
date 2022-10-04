@@ -24,10 +24,8 @@ def updateStudent(studentID, firstName,lastName):
     data=student.query.get(studentID)
     if data==None:
         return "Error, There is no student with this ID"
-    if firstName==None:
-        data.lastName=lastName
-    if lastName==None:
-        data.firstName==firstName
+    data.firstName=firstName
+    data.lastName=lastName
     db.session.add(data)
     db.session.commit()
     return "Student data updated"
@@ -44,7 +42,7 @@ def deleteStudent(studentID):
 #calls the calculateKarmaScore method in student model 
 
 def calculateKarmaScore(studentID):
-    data=review.query.get(studentID)
+    data=review.query.filter(studentID)
     total = 0
     
     for value in data:
