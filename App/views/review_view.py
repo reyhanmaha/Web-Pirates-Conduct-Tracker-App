@@ -8,7 +8,8 @@ from App.controllers import (
     getAllReview,
     getAllReview_json,
     getReview_json,
-    deleteReview
+    deleteReview,
+    updateReview
 )
 
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
@@ -29,11 +30,16 @@ def showAllReviews():
 @review_views.route('/showReview',methods=['GET'])
 def displayReview():
     data=request.get_json()
-    
-    review=getReview(data['reviewID'])
+    review=getReview_json(data['reviewID'])
     if review==None:
         return jsonify("Error, There is no review with that ID")
     return jsonify(review)
+
+@review_views.route('/updateReview', methods=['POST'])
+def update():
+    data=request.get_json()
+    result=updateReview(data['reviewID'],data['details'])
+    return jsonify(result)
 
 @review_views.route('/deleteReview',methods=['DELETE'])
 def remove():

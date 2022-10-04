@@ -15,14 +15,15 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 @user_views.route('/signup', methods=['POST','GET'])    
 def signup():
     data = request.get_json()
-    #data={
-    #    "username": "yok",
-    #    "firstName": "map",
-    #    "lastName": "chaan",
-    #    "password": "kel"
-    #}
+    if data==None:
+        data={
+            "username": "naan",
+            "firstName": "map",
+            "lastName": "chaan",
+            "password": "kel"
+        }
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
-    print(result)
+    
     if result:
         #user=authenticate(data['username'],data['password'])
         return jsonify({"message": "User created"}), 201

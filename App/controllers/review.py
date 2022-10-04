@@ -32,6 +32,16 @@ def getAllReview_json():
     reviews = [review.toJSON() for review in reviews]
     return reviews
 
+def updateReview(reviewID,details):
+    data = review.query.get(reviewID)
+    if not data:
+        return("Review doesnt exist")
+    data.details = details
+    db.session.add(data)
+    db.session.commit()
+    return("Review updated")
+
+
 def deleteReview(reviewID):
     data=review.query.get(reviewID)
     if data==None:

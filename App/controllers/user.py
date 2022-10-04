@@ -58,16 +58,23 @@ def rate_revew(reviewID, rate):
     return ("rated")
 
 def delete_review(reviewID):
-    pass
+    data=review.query.get(reviewID)
+    if data==None:
+        return jsonify("Error, No review found with this ID")
+    db.session.delete(data)
+    db.session.commit()
+    return jsonify("Review has been deleted")
 
 def edit_review(reviewID, details):
 
-    review = review.query(reviewID)
+    review = review.query.get(reviewID)
 
     if not review:
-        return("Review doesnt exist")
+        return("Review does not exist")
     
     review.details = details
+    db.session.add(review)
+    db.session.commit()
 
     return("Review updated")
 
