@@ -7,16 +7,17 @@ def create_review(lecturerID,studentID, details):
     data=student.query.get(studentID)
     user=lecturer.query.get(lecturerID)
     if user==None:
-        print(user)
-        return jsonify("Error, Please enter valid Lecturer")
+        return None
     if data==None:
         newStudent=create_student('gordon','barry',0)
         studentID=newStudent.studentID
     newReview = review(lecturerID=lecturerID,studentID=studentID,details=details)
-    #print(newReview.lecturerID)
     db.session.add(newReview)
     db.session.commit()
     return newReview.toJSON()
+
+def getReview_json(reviewID):
+    return review.query.filter_by(reviewID=reviewID).first().toJSON()
 
 def getReview(reviewID):
     return review.query.filter_by(reviewID=reviewID).first()
@@ -30,3 +31,11 @@ def getAllReview_json():
         return []
     reviews = [review.toJSON() for review in reviews]
     return reviews
+
+def deleteReview(reviewID):
+    data=review.query.get(reviewID)
+    if data==None:
+        return jsonify("Error, No review found with this ID")
+    db.session.delete(data)
+    db.session.commit()
+    return jsonify("Review has been deleted")
