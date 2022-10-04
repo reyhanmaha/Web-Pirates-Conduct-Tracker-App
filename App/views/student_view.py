@@ -7,7 +7,7 @@ from App.controllers import (
     get_student_by_ID,
     get_all_students,
     get_all_students_json,
-    getKarmaScore,
+    #getKarmaScore,
     deleteStudent,
     updateStudent
 )

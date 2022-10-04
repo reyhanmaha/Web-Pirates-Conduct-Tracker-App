@@ -42,9 +42,21 @@ def deleteStudent(studentID):
     return "Student Deleted"
 
 #calls the calculateKarmaScore method in student model 
-def getKarmaScore(studentID):
-    value = calculateKarmaScore(studentID)
-    return jsonify(value)
+
+def calculateKarmaScore(studentID):
+    data=review.query.get(studentID)
+    total = 0
+    
+    for value in data:
+        if data.studentID==studentID:
+            total = total + review.upvotes 
+            total = total - review.downvotes
+        pupil=student.query.get(studentID)
+        pupil.KarmaScore=total
+        db.session.add(pupil)
+        db.session.commit()
+        return "Karma Score calculated"
+
 
 
 

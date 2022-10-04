@@ -10,7 +10,8 @@ from App.controllers import (
     getReview_json,
     deleteReview,
     rateReview,
-    updateReview
+    updateReview,
+    calculateKarmaScore
 )
 
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
@@ -31,7 +32,6 @@ def showAllReviews():
 @review_views.route('/showReview',methods=['GET'])
 def displayReview():
     data=request.get_json()
-    
     review=getReview_json(data['reviewID'])
     if review==None:
         return jsonify("Error, There is no review with that ID")
@@ -52,5 +52,5 @@ def remove():
 @review_views.route('/rateReview', methods=['POST'])
 def rate():
     data = request.get_json()
-    return rateReview(data['reviewID'], data['rating'])
+    return rateReview(data['reviewID'], data['studentID'],data['rating'])
 

@@ -21,11 +21,4 @@ class student(db.Model):
             'karmaScore': self.karmaScore
         }
 
-    def calculateKarmaScore(studentID):
-        total = 0
-        for value in review:
-            if review.studentID==studentID:
-                total = total + review.upvotes 
-                total = total - review.downvotes
-        karmaScore = total
-        return karmaScore
+    

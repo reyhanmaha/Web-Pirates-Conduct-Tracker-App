@@ -1,6 +1,6 @@
 from App.models import review, student, lecturer
 from App.database import db
-from App.controllers import create_student
+from App.controllers import create_student,calculateKarmaScore
 from flask import jsonify
 
 def create_review(lecturerID,studentID, details):
@@ -50,7 +50,7 @@ def deleteReview(reviewID):
     return jsonify("Review has been deleted")
 
 
-def rateReview(reviewID, rating):
+def rateReview(reviewID, studentID, rating):
     data = review.query.get(reviewID)
     if data==None:
         return jsonify("The reviewID which you have entered does not exist")
@@ -65,7 +65,5 @@ def rateReview(reviewID, rating):
         data.downVotes= data.downVotes + rating
     db.session.add(data)
     db.session.commit()
+    calculateKarmaScore(studentID)
     return jsonify("Rating successfully added.")
-
-
-
