@@ -20,6 +20,27 @@ def get_all_students_json():
     students = [student.toJSON() for student in students]
     return students
 
+def updateStudent(studentID, firstName,lastName):
+    data=student.query.get(studentID)
+    if data==None:
+        return "Error, There is no student with this ID"
+    if firstName==None:
+        data.lastName=lastName
+    if lastName==None:
+        data.firstName==firstName
+    db.session.add(data)
+    db.session.commit()
+    return "Student data updated"
+    
+
+def deleteStudent(studentID):
+    target=student.query.get(studentID)
+    if target==None:
+        return "Error, There is no student with this ID"
+    db.session.delete(target)
+    db.session.commit()
+    return "Student Deleted"
+
 #calls the calculateKarmaScore method in student model 
 def getKarmaScore(studentID):
     value = calculateKarmaScore(studentID)

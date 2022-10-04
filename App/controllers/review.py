@@ -41,7 +41,6 @@ def updateReview(reviewID,details):
     db.session.commit()
     return("Review updated")
 
-
 def deleteReview(reviewID):
     data=review.query.get(reviewID)
     if data==None:
@@ -49,3 +48,24 @@ def deleteReview(reviewID):
     db.session.delete(data)
     db.session.commit()
     return jsonify("Review has been deleted")
+
+
+def rateReview(reviewID, rating):
+    data = review.query.get(reviewID)
+    if data==None:
+        return jsonify("The reviewID which you have entered does not exist")
+
+    if rating !=1 and rating !=-1:
+        return jsonify("Invalid rating number. Values are either 1 or -1")
+    
+    if rating==1:
+        data.upVotes= data.upVotes + rating
+        
+    if rating==-1:
+        data.downVotes= data.downVotes + rating
+    db.session.add(data)
+    db.session.commit()
+    return jsonify("Rating successfully added.")
+
+
+

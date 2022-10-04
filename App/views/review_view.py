@@ -9,6 +9,7 @@ from App.controllers import (
     getAllReview_json,
     getReview_json,
     deleteReview,
+    rateReview,
     updateReview
 )
 
@@ -30,6 +31,7 @@ def showAllReviews():
 @review_views.route('/showReview',methods=['GET'])
 def displayReview():
     data=request.get_json()
+    
     review=getReview_json(data['reviewID'])
     if review==None:
         return jsonify("Error, There is no review with that ID")
@@ -46,4 +48,9 @@ def remove():
     data=request.get_json()
     return deleteReview(data['reviewID'])
      
-    
+
+@review_views.route('/rateReview', methods=['POST'])
+def rate():
+    data = request.get_json()
+    return rateReview(data['reviewID'], data['rating'])
+
