@@ -18,16 +18,16 @@ def signup():
     data = request.get_json()
     if data==None:
         data={
-            "username": "saitama",
+            "username": "vegeta",
             "firstName": "map",
             "lastName": "trump",
-            "password": "firebender"
+            "password": "waterbender"
         }
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     
     if result:
         user=authenticate(data['username'],data['password'])
-        login_user(user)
+        #login_user(user)
         print(user)
         return jsonify({"message": "User created"}), 201
         #return render_template('index.html')
