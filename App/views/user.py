@@ -6,7 +6,8 @@ from App.controllers import (
     create_user, 
     get_all_users,
     get_all_users_json,
-    authenticate
+    authenticate,
+    login_user
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
@@ -17,15 +18,16 @@ def signup():
     data = request.get_json()
     if data==None:
         data={
-            "username": "naan",
+            "username": "saitama",
             "firstName": "map",
-            "lastName": "chaan",
-            "password": "kel"
+            "lastName": "trump",
+            "password": "firebender"
         }
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     
     if result:
         user=authenticate(data['username'],data['password'])
+        login_user(user)
         print(user)
         return jsonify({"message": "User created"}), 201
         #return render_template('index.html')
