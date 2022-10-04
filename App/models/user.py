@@ -2,7 +2,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
 class lecturer(db.Model):
-    lecturerID = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String(60), unique=True ,nullable=False)
     firstName= db.Column(db.String(50), nullable=False)
     lastName= db.Column(db.String(50), nullable=False)
@@ -17,7 +17,7 @@ class lecturer(db.Model):
 
     def toJSON(self):
         return{
-            'lecturerID': self.lecturerID,
+            'lecturerID': self.id,
             'username': self.username,
             'firstName': self.firstName,
             'lastName': self.lastName
