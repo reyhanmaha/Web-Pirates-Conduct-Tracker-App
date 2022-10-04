@@ -42,7 +42,7 @@ def deleteStudent(studentID):
 #calls the calculateKarmaScore method in student model 
 
 def calculateKarmaScore(studentID):
-    data=review.query.filter(studentID)
+    data=review.query.get(studentID)
     total = 0
     
     for value in data:

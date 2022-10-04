@@ -39,6 +39,7 @@ def signup():
 #    return jsonify(users)
 
 @user_views.route('/api/users',methods=['GET'])
+#@jwt_required()
 def client_app():
     users = get_all_users_json()
     return jsonify(users)
