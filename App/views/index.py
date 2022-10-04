@@ -21,6 +21,3 @@ def index_page():
     #for person in people:
     #    print(person)
     return render_template('index.html')
-
-#@index_views.route('/login', methods=['GET'])
-#def login_user():

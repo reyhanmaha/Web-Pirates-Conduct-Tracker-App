@@ -20,12 +20,12 @@ class review(db.Model):
     def toJSON(self):
         return{
             'reviewID': self.reviewID,
-            'lectureID': self.lectureID,
+            'lecturerID': self.lecturerID,
             'studentID': self.studentID,
             'details' :self.details,
             'upVotes': self.upVotes,
             'downVotes' : self.downVotes
         }
-    
+
 
 

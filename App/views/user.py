@@ -24,7 +24,7 @@ def signup():
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     print(result)
     if result:
-        user=authenticate(data['username'],data['password'])
+        #user=authenticate(data['username'],data['password'])
         return jsonify({"message": "User created"}), 201
         #return render_template('index.html')
     return jsonify({"message": "Server error"}), 500

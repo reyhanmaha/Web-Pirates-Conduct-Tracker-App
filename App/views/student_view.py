@@ -13,6 +13,7 @@ from App.controllers import (
 student_views = Blueprint('student_views', __name__, template_folder='../templates')
 
 @student_views.route('/addStudent', methods=['POST'])
+#@jwt_required()
 def add_student():
     data=request.get_json()
     student=create_student(data['firstName'], data['lastName'],0)
