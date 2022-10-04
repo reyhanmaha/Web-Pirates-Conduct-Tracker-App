@@ -25,15 +25,16 @@ def signup():
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     
     if result:
-        #user=authenticate(data['username'],data['password'])
+        user=authenticate(data['username'],data['password'])
+        print(user)
         return jsonify({"message": "User created"}), 201
         #return render_template('index.html')
     return jsonify({"message": "Server error"}), 500
 
-@user_views.route('/users', methods=['GET'])
-def get_user_page():
-    users = get_all_users()
-    return jsonify(users)
+#@user_views.route('/users', methods=['GET'])
+#def get_user_page():
+#    users = get_all_users()
+#    return jsonify(users)
 
 @user_views.route('/api/users',methods=['GET'])
 def client_app():
