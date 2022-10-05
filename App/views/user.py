@@ -18,10 +18,10 @@ def signup():
     data = request.get_json()
     if data==None:
         data={
-            "username": "vegeta",
+            "username": "gohan",
             "firstName": "map",
             "lastName": "trump",
-            "password": "waterbender"
+            "password": "superSaiyan"
         }
     result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     
