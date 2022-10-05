@@ -28,7 +28,9 @@ def signup():
     if result:
         user=authenticate(data['username'],data['password'])
         return jsonify({"message": "User created"}), 201
-    return jsonify({"message": "Server error"}), 500
+    
+    #db.session.rollback()
+    return jsonify({"message": "User is already created"}), 500
 
 @user_views.route('/api/users',methods=['GET'])
 #@jwt_required()
