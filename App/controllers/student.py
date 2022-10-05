@@ -43,14 +43,12 @@ def deleteStudent(studentID):
 
 def calculateKarmaScore(studentID):
     data=review.query.filter_by(studentID=studentID).all()
-    #print(data.toJSON())
+    
     total = 0
     
     for value in data:
-        #if data.studentID==studentID:
         total = total + value.upVotes
-        total = total + value.downVotes
-        print(total)
+        total = total - value.downVotes
     pupil=student.query.get(studentID)
     pupil.karmaScore=total
     db.session.add(pupil)

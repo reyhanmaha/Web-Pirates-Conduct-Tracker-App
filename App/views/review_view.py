@@ -32,9 +32,10 @@ def showAllReviews():
 @review_views.route('/showReview',methods=['GET'])
 def displayReview():
     data=request.get_json()
-    review=getReview_json(data['reviewID'])
+    review=getReview(data['reviewID'])
     if review==None:
         return jsonify("Error, There is no review with that ID")
+    review=review.toJSON()
     return jsonify(review)
 
 @review_views.route('/updateReview', methods=['POST'])

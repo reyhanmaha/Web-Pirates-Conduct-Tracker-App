@@ -13,7 +13,7 @@ from App.controllers import (
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
-@user_views.route('/signup', methods=['POST','GET'])    
+@user_views.route('/signup', methods=['POST'])    
 def signup():
     data = request.get_json()
     if data==None:
@@ -27,16 +27,8 @@ def signup():
     
     if result:
         user=authenticate(data['username'],data['password'])
-        #login_user(user)
-        print(user)
         return jsonify({"message": "User created"}), 201
-        #return render_template('index.html')
     return jsonify({"message": "Server error"}), 500
-
-#@user_views.route('/users', methods=['GET'])
-#def get_user_page():
-#    users = get_all_users()
-#    return jsonify(users)
 
 @user_views.route('/api/users',methods=['GET'])
 #@jwt_required()

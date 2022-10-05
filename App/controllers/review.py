@@ -62,7 +62,7 @@ def rateReview(reviewID, studentID, rating):
         data.upVotes= data.upVotes + rating
         
     if rating==-1:
-        data.downVotes= data.downVotes + rating
+        data.downVotes= data.downVotes + 1
     db.session.add(data)
     db.session.commit()
     calculateKarmaScore(studentID)
