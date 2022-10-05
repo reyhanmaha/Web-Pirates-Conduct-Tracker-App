@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory,redirect
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_identity
 
 
 from App.controllers import (
@@ -17,19 +17,22 @@ from App.controllers import (
 review_views = Blueprint('review_views', __name__, template_folder='../templates')
 
 @review_views.route('/createReview',methods=['POST'])
+@jwt_required()
 def add_Review():
     data=request.get_json()
-    review=create_review(data['lecturerID'], data['studentID'], data['details'])
+    review=create_review(current_identity.id, data['studentID'], data['details'])
     if review==None:
         return jsonify("Error, Please enter valid Lecturer")
     return jsonify(review)
 
 @review_views.route('/showAllReviews',methods=['GET'])
+@jwt_required()
 def showAllReviews():
     reviews=getAllReview_json()
     return jsonify(reviews)
 
 @review_views.route('/showReview',methods=['GET'])
+@jwt_required()
 def displayReview():
     data=request.get_json()
     review=getReview(data['reviewID'])
@@ -39,18 +42,21 @@ def displayReview():
     return jsonify(review)
 
 @review_views.route('/updateReview', methods=['POST'])
+@jwt_required()
 def update():
     data=request.get_json()
     result=updateReview(data['reviewID'],data['details'])
     return jsonify(result)
 
 @review_views.route('/deleteReview',methods=['DELETE'])
+@jwt_required()
 def remove():
     data=request.get_json()
     return deleteReview(data['reviewID'])
      
 
 @review_views.route('/rateReview', methods=['POST'])
+@jwt_required()
 def rate():
     data = request.get_json()
     return rateReview(data['reviewID'], data['studentID'],data['rating'])

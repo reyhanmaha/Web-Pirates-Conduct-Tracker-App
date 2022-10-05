@@ -15,7 +15,7 @@ from App.controllers import (
 student_views = Blueprint('student_views', __name__, template_folder='../templates')
 
 @student_views.route('/addStudent', methods=['POST'])
-#@jwt_required()
+@jwt_required()
 def add_student():
     data=request.get_json()
     student=create_student(data['firstName'], data['lastName'],0)
@@ -23,23 +23,25 @@ def add_student():
     return jsonify(people)
 
 @student_views.route('/showStudents', methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def show_all_students():
     students=get_all_students_json()
     return jsonify(students)
 
 @student_views.route('/getStudent/<studentID>',methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def find_student(studentID):
     target=get_student_by_ID(studentID)
     return target.toJSON()
 
 @student_views.route('/updateStudent',methods=['POST'])
+@jwt_required()
 def editStudent():
     data=request.get_json()
     return updateStudent(data['studentID'],data['firstName'],data['lastName'])
 
 @student_views.route('/deleteStudent',methods=['DELETE'])
+@jwt_required()
 def removeStudent():
     data=request.get_json()
     return deleteStudent(data['studentID'])

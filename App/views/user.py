@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory
-from flask_jwt import jwt_required
-
+from flask_jwt import jwt_required, current_identity
 
 from App.controllers import (
     create_user, 
@@ -33,10 +32,15 @@ def signup():
     return jsonify({"message": "User is already created"}), 500
 
 @user_views.route('/api/users',methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def client_app():
     users = get_all_users_json()
     return jsonify(users)
+
+@user_views.route('/identify')
+@jwt_required()
+def protected():
+    return current_identity.username
 
 @user_views.route('/static/users')
 def static_user_page():
