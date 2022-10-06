@@ -16,6 +16,14 @@ def create_review(id,studentID, details):
     db.session.commit()
     return newReview.toJSON()
 
+#returns just the review ID for every review the student is in
+def get_student_reviews(studentID):
+
+    student_reviews = review.query.filter_by(studentID=studentID).all()
+
+    
+    return [review.toJSON()['reviewID'] for review in student_reviews] 
+
 def getReview_json(reviewID):
     return review.query.filter_by(reviewID=reviewID).first().toJSON()
 

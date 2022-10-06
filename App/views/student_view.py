@@ -7,6 +7,7 @@ from App.controllers import (
     get_student_by_ID,
     get_all_students,
     get_all_students_json,
+    get_student_reviews,
     #getKarmaScore,
     deleteStudent,
     updateStudent
@@ -28,11 +29,24 @@ def show_all_students():
     students=get_all_students_json()
     return jsonify(students)
 
-@student_views.route('/getStudent/<studentID>',methods=['GET'])
+@student_views.route('/getStudent',methods=['GET'])
 @jwt_required()
-def find_student(studentID):
-    target=get_student_by_ID(studentID)
-    return target.toJSON()
+def find_student():
+    data = request.get_json()
+    
+    target=get_student_by_ID(data['studentID'])
+
+    if not target:
+        return "Student Not Found!"
+
+    student_reviews = get_student_reviews(data["studentID"])
+
+    target = target.toJSON()
+
+    target.update({'review ids': student_reviews} )
+
+    return jsonify(target)
+ 
 
 @student_views.route('/updateStudent',methods=['POST'])
 @jwt_required()
