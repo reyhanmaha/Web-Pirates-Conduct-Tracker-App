@@ -1,12 +1,12 @@
 from App.models import lecturer, student, review
-from App.database import db, IntegrityError
+from App.database import db
 
 def create_user(username,firstName,lastName, password):
     newuser = lecturer(username=username, firstName=firstName, lastName=lastName, password=password)
     try: 
         db.session.add(newuser)
         db.session.commit()
-    except IntegrityError:
+    except Exception:
         db.session.rollback()
         return None
     return newuser
