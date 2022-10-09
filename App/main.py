@@ -37,18 +37,19 @@ def add_views(app, views):
 
 def loadConfig(app, config):
     app.config['ENV'] = os.environ.get('ENV', 'DEVELOPMENT')
+    delta = 7
     if app.config['ENV'] == "DEVELOPMENT":
         app.config.from_object('App.config')
-        app.config['JWT_EXPIRATION_DELTA'] =  timedelta(days=int(7))
+        delta = app.config['JWT_EXPIRATION_DELTA']
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
         app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-        app.config['ENV'] = os.environ.get('ENV')
         app.config['DEBUG'] = os.environ.get('ENV').upper() != 'PRODUCTION'
-        delta = os.environ.get('JWT_EXPIRATION_DELTA', 7)
-
+        app.config['ENV'] = os.environ.get('ENV')
+        delta = app.config['JWT_EXPIRATION_DELTA']
+        
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=int(delta))
-
+        
     for key, value in config.items():
         app.config[key] = config[key]
 
