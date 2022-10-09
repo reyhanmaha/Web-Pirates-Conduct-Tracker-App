@@ -3,8 +3,12 @@ from App.database import db
 
 def create_user(username,firstName,lastName, password):
     newuser = lecturer(username=username, firstName=firstName, lastName=lastName, password=password)
-    db.session.add(newuser)
-    db.session.commit()
+    try: 
+        db.session.add(newuser)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return None
     return newuser
 
 def get_user_by_username(username):

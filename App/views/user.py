@@ -15,14 +15,9 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 @user_views.route('/signup', methods=['POST'])    
 def signup():
     data = request.get_json()
-
-    try:
-        result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
-    except Exception as error:
-        return (f"The following error occured: {type(error)}")
+    result = create_user(data['username'],data['firstName'],data["lastName"],data['password'])
     if result:
         return jsonify({"message": "User created"}), 201
-    
     return jsonify({"message": "User is already created"}), 500
 
 @user_views.route('/api/users',methods=['GET'])
