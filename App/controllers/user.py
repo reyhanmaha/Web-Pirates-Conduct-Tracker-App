@@ -1,5 +1,5 @@
 from App.models import lecturer, student, review
-from App.database import db
+from App.database import db, IntegrityError
 
 def create_user(username,firstName,lastName, password):
     newuser = lecturer(username=username, firstName=firstName, lastName=lastName, password=password)
