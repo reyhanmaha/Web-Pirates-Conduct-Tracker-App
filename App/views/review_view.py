@@ -52,7 +52,7 @@ def update():
 @jwt_required()
 def remove():
     data=request.get_json()
-    return deleteReview(data['reviewID'])
+    return deleteReview(data['reviewID'], data['studentID'])
      
 
 @review_views.route('/rateReview', methods=['POST'])
