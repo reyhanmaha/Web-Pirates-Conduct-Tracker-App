@@ -49,12 +49,13 @@ def updateReview(reviewID,details):
     db.session.commit()
     return("Review updated")
 
-def deleteReview(reviewID):
+def deleteReview(reviewID, studentID):
     data=review.query.get(reviewID)
     if data==None:
         return jsonify("Error, No review found with this ID")
     db.session.delete(data)
     db.session.commit()
+    calculateKarmaScore(studentID)  #calculate new karmaScore after review was deleted
     return jsonify("Review has been deleted")
 
 
