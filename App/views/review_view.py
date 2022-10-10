@@ -41,11 +41,11 @@ def displayReview():
     review=review.toJSON()
     return jsonify(review)
 
-@review_views.route('/updateReview', methods=['POST'])
+@review_views.route('/updateReview/<reviewID>', methods=['PUT'])
 @jwt_required()
-def update():
+def update(reviewID):
     data=request.get_json()
-    result=updateReview(data['reviewID'],data['details'])
+    result=updateReview(reviewID,data['details'])
     return jsonify(result)
 
 @review_views.route('/deleteReview',methods=['DELETE'])
