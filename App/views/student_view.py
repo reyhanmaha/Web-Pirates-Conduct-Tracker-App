@@ -48,11 +48,11 @@ def find_student():
     return jsonify(target)
  
 
-@student_views.route('/updateStudent',methods=['POST'])
+@student_views.route('/updateStudent/<studentID>',methods=['PUT'])
 @jwt_required()
-def editStudent():
+def editStudent(studentID):
     data=request.get_json()
-    return updateStudent(data['studentID'],data['firstName'],data['lastName'])
+    return updateStudent(studentID,data['firstName'],data['lastName'])
 
 @student_views.route('/deleteStudent',methods=['DELETE'])
 @jwt_required()
