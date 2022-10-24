@@ -3,7 +3,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import create_db
-from App.models import User
+from App.models import lecturer
 from App.controllers import (
     create_user,
     get_all_users_json,
@@ -24,23 +24,23 @@ LOGGER = logging.getLogger(__name__)
 class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
-        user = User("bob", "bobpass")
-        assert user.username == "bob"
+        user = lecturer('hawkings', "bob", "carl", "bobpass")
+        assert user.username == "hawkings"
 
     def test_toJSON(self):
-        user = User("bob", "bobpass")
+        user = lecturer('hawkings', "bob", "carl", "bobpass")
         user_json = user.toJSON()
-        self.assertDictEqual(user_json, {"id":None, "username":"bob"})
+        self.assertDictEqual(user_json, {"id":None, "username":"kawings"})
     
     def test_hashed_password(self):
         password = "mypass"
         hashed = generate_password_hash(password, method='sha256')
-        user = User("bob", password)
+        user = lecturer('hawkings', "bob", "carl", "bobpass")
         assert user.password != password
 
     def test_check_password(self):
         password = "mypass"
-        user = User("bob", password)
+        user = lecturer('hawkings', "bob", "carl", "bobpass")
         assert user.check_password(password)
 
 '''
