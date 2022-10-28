@@ -8,10 +8,10 @@ class student(db.Model):
     karmaScore = db.Column(db.Integer, nullable = True)
     studentComments= db.relationship('review',backref='student',lazy=True,cascade="all, delete-orphan")
 
-    def __init__(self, firstName, lastName,karmaScore):
+    def __init__(self, firstName, lastName,karmaScore = 0):
         self.firstName = firstName
         self.lastName = lastName
-        self.karmaScore = 0
+        self.karmaScore = karmaScore
 
     def toJSON(self):
         return{

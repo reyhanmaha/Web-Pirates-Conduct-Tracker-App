@@ -9,8 +9,7 @@ class review(db.Model):
     downVotes = db.Column(db.Integer, nullable = True)
 
     
-    def __init__(self, lecturerID, studentID, details ):
-        #self.reviewID= reviewID
+    def __init__(self, lecturerID, studentID, details):
         self.lecturerID = lecturerID
         self.studentID = studentID
         self.details = details
