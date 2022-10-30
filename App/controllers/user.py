@@ -15,7 +15,7 @@ def get_user_by_username(username):
     return lecturer.query.filter_by(username=username).first()
 
 def get_user(lecturerID):
-    return lecturer.query.get(id)
+    return lecturer.query.get(lecturerID)
 
 def get_all_users():
     return lecturer.query.all()

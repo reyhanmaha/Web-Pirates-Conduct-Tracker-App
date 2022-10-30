@@ -95,9 +95,10 @@ class UsersIntegrationTests(unittest.TestCase):
 
     def test_get_all_users_json(self):
         users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"bob"}, {"id":2, "username":"rick"}], users_json)
+        self.assertListEqual(users_json, [{"id":1, "username":"bobby1", "firstName" : "bob", "lastName" : "bobson"},
+                                          {"id":2, "username":"rick", "firstName": "rick", "lastName" : "ricky"}])
 
     def test_update_user(self):
-        update_user(1, "ronnie")
+        test = update_user(1, "ronnie")
         user = get_user(1)
         assert user.username == "ronnie"
