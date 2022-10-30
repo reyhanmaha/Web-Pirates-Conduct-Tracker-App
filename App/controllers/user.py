@@ -42,9 +42,6 @@ def create_review(studentID, id, details):
     db.session.commit()
     return newreview
 
-def update_review(reviewID, id, details):
-    pass
-
 #not sure if functions would require readded and commiting reviews to model
 
 def rate_revew(reviewID, rate):
@@ -88,8 +85,6 @@ def view_review(reviewID):
 
 def view_all_reviews():
     return(review.query.all())
-
-
 
 def update_user(id, username):
     user = get_user(id)
