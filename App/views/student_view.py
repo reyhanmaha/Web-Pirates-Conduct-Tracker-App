@@ -52,10 +52,10 @@ def find_student():
 @jwt_required()
 def editStudent(studentID):
     data=request.get_json()
-    return updateStudent(studentID,data['firstName'],data['lastName'])
+    return jsonify()(updateStudent(studentID,data['firstName'],data['lastName']))
 
 @student_views.route('/deleteStudent',methods=['DELETE'])
 @jwt_required()
 def removeStudent():
     data=request.get_json()
-    return deleteStudent(data['studentID'])
+    return jsonify()(deleteStudent(data['studentID']))
