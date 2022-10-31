@@ -44,7 +44,7 @@ def find_student():
     target = target.toJSON()
 
     target.update({'review ids': student_reviews} )
-
+    
     return jsonify(target)
  
 
@@ -52,10 +52,16 @@ def find_student():
 @jwt_required()
 def editStudent(studentID):
     data=request.get_json()
-    return jsonify(updateStudent(studentID,data['firstName'],data['lastName']))
+
+    result = {"message" : updateStudent(studentID,data['firstName'],data['lastName'])}
+
+    return jsonify(result)
 
 @student_views.route('/deleteStudent',methods=['DELETE'])
 @jwt_required()
 def removeStudent():
     data=request.get_json()
-    return jsonify(deleteStudent(data['studentID']))
+
+    result = {"message" : deleteStudent(data['studentID'])}
+    
+    return jsonify(result)
