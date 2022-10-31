@@ -10,7 +10,14 @@ from App.controllers import (
     authenticate,
     get_user,
     get_user_by_username,
-    update_user
+    update_user,
+    create_student,
+    get_student_by_ID,
+    updateStudent,
+    deleteStudent,
+    create_review,
+    getReview,
+    updateReview
 )
 
 from wsgi import app
@@ -87,6 +94,10 @@ def test_authenticate():
     user = create_user("bobby1","bob", "bobson","bobpass")
     assert authenticate("bobby1", "bobpass") != None
 
+
+
+
+
 class UsersIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
@@ -102,3 +113,44 @@ class UsersIntegrationTests(unittest.TestCase):
         test = update_user(1, "ronnie")
         user = get_user(1)
         assert user.username == "ronnie"
+        
+    def test_get_user(self):
+        user=get_user(1)
+        assert user !=None
+    
+    def test_create_student(self):
+        student= create_student("tim","morgan",4)
+        assert student.firstName=="tim"
+    
+    def test_get_student_by_ID(self):
+        student=get_student_by_ID(1)
+        assert student!=None
+    
+    def test_updateStudent(self):
+        student=get_student_by_ID(1)
+        updateStudent(1,"dwayne","johnson")
+        person=get_student_by_ID(1)
+        assert person.firstName=="dwayne"
+    
+    def test_deleteStudent(self):
+        student=create_student("morgan", "freeman", 10)
+        deleteStudent(2)
+        person=get_student_by_ID(2)
+        assert person==None
+    
+    def test_create_review(self):
+        review=create_review(1,1,"bad student")
+        item=getReview(1)
+        assert item!=None
+    
+    def test_updateReview(self):
+        updateReview(1,"very good student")
+        review=getReview(1)
+        assert review.details=="very good student"
+    
+    def test_deleteReview():
+        pass
+
+    
+
+    
