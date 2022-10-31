@@ -17,7 +17,9 @@ from App.controllers import (
     deleteStudent,
     create_review,
     getReview,
-    updateReview
+    updateReview,
+    deleteReview,
+    rateReview
 )
 
 from wsgi import app
@@ -148,7 +150,18 @@ class UsersIntegrationTests(unittest.TestCase):
         review=getReview(1)
         assert review.details=="very good student"
     
-    def test_deleteReview():
+    def test_deleteReview(self):
+        review=create_review(1, 1, "he falls asleep in class")
+        deleteReview(2,1)
+        item=getReview(2)
+        assert item==None
+    
+    def test_rateReview(self):
+        rateReview(1,1,1)
+        student=get_student_by_ID(1)
+        assert student.karmaScore==1
+
+    def test_calculateKarmaScore(self):
         pass
 
     
