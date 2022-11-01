@@ -19,7 +19,10 @@ from App.controllers import (
     getReview,
     updateReview,
     deleteReview,
-    rateReview
+    rateReview,
+    calculateKarmaScore,
+    get_all_students_json,
+    get_student_by_ID_JSON
 )
 
 from wsgi import app
@@ -136,8 +139,10 @@ class UsersIntegrationTests(unittest.TestCase):
     
     def test_deleteStudent(self):
         student=create_student("morgan", "freeman", 10)
+        create_student("terry", "silver", 3)
         deleteStudent(2)
         person=get_student_by_ID(2)
+        print(person)
         assert person==None
     
     def test_create_review(self):
@@ -157,13 +162,10 @@ class UsersIntegrationTests(unittest.TestCase):
         assert item==None
     
     def test_rateReview(self):
-        rateReview(1,1,1)
+        rateReview(1,1,-1)
         student=get_student_by_ID(1)
-        assert student.karmaScore==1
+        assert student.karmaScore==-1
 
     def test_calculateKarmaScore(self):
         pass
-
-    
-
     

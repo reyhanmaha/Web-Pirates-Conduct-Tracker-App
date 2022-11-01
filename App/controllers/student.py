@@ -10,6 +10,10 @@ def create_student(firstName,lastName,karmaScore):
 def get_student_by_ID(studentID):
     return student.query.filter_by(studentID=studentID).first()
 
+def get_student_by_ID_JSON(studentID):
+    student=student.query.filter_by(studentID=studentID).first()
+    return student.toJSON()
+
 def get_all_students():
     return student.query.all()
 
