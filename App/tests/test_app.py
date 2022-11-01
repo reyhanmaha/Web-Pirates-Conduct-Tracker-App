@@ -22,7 +22,8 @@ from App.controllers import (
     rateReview,
     calculateKarmaScore,
     get_all_students_json,
-    get_student_by_ID_JSON
+    get_student_by_ID_JSON,
+    getAllReview_json
 )
 
 from wsgi import app
@@ -162,10 +163,13 @@ class UsersIntegrationTests(unittest.TestCase):
         assert item==None
     
     def test_rateReview(self):
-        rateReview(1,1,-1)
+        rateReview(1,1,1)
         student=get_student_by_ID(1)
-        assert student.karmaScore==-1
+        assert student.karmaScore==2
 
     def test_calculateKarmaScore(self):
-        pass
-    
+        create_student("jesus", "christ", 0)
+        create_review(1, 1, "good student")
+        rateReview(1, 1, 1)
+        target=get_student_by_ID(1)
+        assert target.karmaScore==1
