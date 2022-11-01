@@ -143,7 +143,6 @@ class UsersIntegrationTests(unittest.TestCase):
         create_student("terry", "silver", 3)
         deleteStudent(2)
         person=get_student_by_ID(2)
-        print(person)
         assert person==None
     
     def test_create_review(self):
@@ -158,18 +157,28 @@ class UsersIntegrationTests(unittest.TestCase):
     
     def test_deleteReview(self):
         review=create_review(1, 1, "he falls asleep in class")
-        deleteReview(2,1)
-        item=getReview(2)
+        deleteReview(review["reviewID"],1)
+        item=getReview(review["reviewID"])
         assert item==None
     
     def test_rateReview(self):
+        student=get_student_by_ID(1)
+        old_score = student.karmaScore
+
         rateReview(1,1,1)
         student=get_student_by_ID(1)
-        assert student.karmaScore==2
+        assert student.karmaScore==old_score+1
 
     def test_calculateKarmaScore(self):
-        create_student("jesus", "christ", 0)
-        create_review(1, 1, "good student")
-        rateReview(1, 1, 1)
+        new_student = create_student("jesus", "christ", 0)
+        new_review = create_review(1, new_student.studentID, "good student")
+        rateReview(new_review["reviewID"], new_student.studentID, 1)
         target=get_student_by_ID(1)
-        assert target.karmaScore==1
+        assert target.karmaScore == 1
+
+    # def test_calculateKarmaScore(self):
+    #     create_student("jesus", "christ", 0)
+    #     create_review(1, 1, "good student")
+    #     rateReview(1, 1, 1)
+    #     target=get_student_by_ID(1)
+    #     assert target.karmaScore==1
