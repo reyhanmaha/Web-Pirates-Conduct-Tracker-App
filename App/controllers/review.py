@@ -47,7 +47,7 @@ def updateReview(reviewID,details):
     data.details = details
     db.session.add(data)
     db.session.commit()
-    return("Review updated")
+    return{'message':"Review updated"}
 
 def deleteReview(reviewID, studentID):
     data=review.query.get(reviewID)
@@ -56,7 +56,7 @@ def deleteReview(reviewID, studentID):
     db.session.delete(data)
     db.session.commit()
     calculateKarmaScore(studentID)  #calculate new karmaScore after review was deleted
-    return jsonify("Review has been deleted")
+    return jsonify({'message':"Review has been deleted"})
 
 
 def rateReview(reviewID, studentID, rating):
@@ -75,4 +75,4 @@ def rateReview(reviewID, studentID, rating):
     db.session.add(data)
     db.session.commit()
     calculateKarmaScore(studentID)
-    return jsonify("Rating successfully added.")
+    return jsonify({'message':"Rating successfully added."})

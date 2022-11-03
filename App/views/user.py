@@ -29,7 +29,7 @@ def client_app():
 @user_views.route('/identify')
 @jwt_required()
 def protected():
-    return current_identity.username
+    return jsonify({'username':current_identity.username})
 
 @user_views.route('/static/users')
 def static_user_page():
